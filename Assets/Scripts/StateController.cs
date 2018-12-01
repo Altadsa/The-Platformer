@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class StateController : MonoBehaviour {
+public class StateController : MonoBehaviour
+{
 
     public GameObject player;
 
@@ -15,7 +16,73 @@ public class StateController : MonoBehaviour {
         }
     }
 
-    void Update () {
-		
-	}
+    void Update()
+    {
+        SelectLevelState();
+    }
+
+    private void SelectLevelState()
+    {
+        HandleKeyboardInput();
+        player.transform.position = selectedLevel.transform.position;
+    }
+
+    private void HandleKeyboardInput()
+    {
+        SelectStates();
+        LoadLevel();
+    }
+
+    private void SelectStates()
+    {
+        SelectLeftState();
+        SelectUpState();
+        SelectRightState();
+        SelectDownState();
+    }
+
+    private void SelectLeftState()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (!selectedLevel.LeftState) { return; }
+            selectedLevel = selectedLevel.LeftState;
+        }
+    }
+
+    private void SelectUpState()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (!selectedLevel.UpState) { return; }
+            selectedLevel = selectedLevel.UpState;
+        }
+    }
+
+    private void SelectRightState()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (!selectedLevel.RightState) { return; }
+            selectedLevel = selectedLevel.RightState;
+        }
+    }
+
+    private void SelectDownState()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (!selectedLevel.DownState) { return; }
+            selectedLevel = selectedLevel.DownState;
+        }
+    }
+
+    private void LoadLevel()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (selectedLevel.LevelName == null) { return; }
+            LevelManager.Instance.LoadLevel(selectedLevel.LevelName);
+        }
+    }
 }
