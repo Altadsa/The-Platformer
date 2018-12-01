@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Hazards
+  - Climbables
+  - Collectables
+  - Enemies
+  - Player
+  - Forgeground
   - 
   - 
   - 
@@ -47,6 +47,21 @@ TagManager:
   - name: Level States
     uniqueID: 1154060617
     locked: 0
+  - name: Hazards
+    uniqueID: 2676646483
+    locked: 0
+  - name: Climbables
+    uniqueID: 3810622645
+    locked: 0
+  - name: Collectables
+    uniqueID: 4252780413
+    locked: 0
+  - name: Enemies
+    uniqueID: 2772288329
+    locked: 0
   - name: Player
     uniqueID: 701930303
+    locked: 0
+  - name: Foreground
+    uniqueID: 2398529487
     locked: 0
