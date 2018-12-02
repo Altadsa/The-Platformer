@@ -21,6 +21,19 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void EndGame()
+    {
+        string[] regionAndLevel = FindObjectOfType<LevelStartScreen>().GetLevelName();
+        if (regionAndLevel.Length == 2)
+        {
+            int nextLevel = int.Parse(regionAndLevel[1]);
+            nextLevel++;
+            regionAndLevel[1] = nextLevel.ToString();
+            string nextLevelString = string.Concat(regionAndLevel[0] + "_0" + regionAndLevel[1]);
+            LevelManager.Instance.LoadLevel(nextLevelString);
+        }
+    }
+
     private void Awake()
     {
         coinsCollected = 0;

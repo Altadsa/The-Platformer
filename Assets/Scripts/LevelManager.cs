@@ -36,6 +36,11 @@ public class LevelManager : MonoBehaviour {
         StartCoroutine(StartLevel(levelName));
     }
 
+    public string GetLevelName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
     public void Quit()
     {
         Application.Quit();

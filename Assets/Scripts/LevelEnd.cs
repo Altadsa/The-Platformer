@@ -10,7 +10,7 @@ public class LevelEnd : MonoBehaviour {
     {
         if (collision.gameObject == player)
         {
-            Debug.Log("Level Complete");
+            GameManager.Instance.EndGame();
         }
     }
 }
