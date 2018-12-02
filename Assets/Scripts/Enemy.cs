@@ -2,6 +2,7 @@
 
 public class Enemy : MonoBehaviour {
 
+    public CapsuleCollider2D body;
     public BoxCollider2D head;
     public Rigidbody2D enemyRB;
 
@@ -39,6 +40,15 @@ public class Enemy : MonoBehaviour {
         if (isHeadHit)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void DamagePlayer()
+    {
+        bool isTouchingPlayer = body.IsTouchingLayers(LayerMask.GetMask("Player"));
+        if (isTouchingPlayer)
+        {
+            FindObjectOfType<PlayerHealth>().DecreaseHealth();
         }
     }
 

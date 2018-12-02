@@ -5,6 +5,8 @@ public class HealthUI : MonoBehaviour {
 
     public Image[] healthImages;
 
+    public Sprite[] sprites;
+
     public PlayerHealth player;
 
     private void Update()
@@ -16,32 +18,25 @@ public class HealthUI : MonoBehaviour {
     {
         if (!player) { return; }
         if (PlayerHealth.health < 0) { return; }
+        bool active = true;
 
-if (PlayerHealth.health == 3)
+        for (int i = 0; i < healthImages.Length; i++)
         {
-            healthImages[2].enabled = true;
-            healthImages[1].enabled = true;
-            healthImages[0].enabled = true;
+            if (!active)
+            {
+                healthImages[i].sprite = sprites[0];
+            }
+            else
+            {
+                if (PlayerHealth.health >= i)
+                {
+                    healthImages[i].sprite = sprites[1];
+                }
+                else
+                {
+                    active = false;
+                }
+            }
         }
-else if (PlayerHealth.health == 2)
-        {
-            healthImages[2].enabled = false;
-            healthImages[1].enabled = true;
-            healthImages[0].enabled = true;
-        }
-else if (PlayerHealth.health == 1)
-        {
-            healthImages[2].enabled = false;
-            healthImages[1].enabled = false;
-            healthImages[0].enabled = true;
-        }
-else
-        {
-            healthImages[2].enabled = false;
-            healthImages[1].enabled = false;
-            healthImages[0].enabled = false;
-        }
-
-
     }
 }
