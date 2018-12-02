@@ -51,8 +51,7 @@ public class StateController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (!selectedLevel.LeftState) { return; }
-            selectedLevel = selectedLevel.LeftState;
+            SelectState(selectedLevel.LeftState);
         }
     }
 
@@ -60,8 +59,7 @@ public class StateController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (!selectedLevel.UpState) { return; }
-            selectedLevel = selectedLevel.UpState;
+            SelectState(selectedLevel.UpState);
         }
     }
 
@@ -69,8 +67,7 @@ public class StateController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (!selectedLevel.RightState) { return; }
-            selectedLevel = selectedLevel.RightState;
+            SelectState(selectedLevel.RightState);
         }
     }
 
@@ -78,9 +75,27 @@ public class StateController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (!selectedLevel.DownState) { return; }
-            selectedLevel = selectedLevel.DownState;
+            SelectState(selectedLevel.DownState);
         }
+    }
+
+    private void SelectState(LevelState level)
+    {
+        if (!level) { return; }
+        if (selectedLevel.IsComplete())
+        {
+            selectedLevel = level;
+            return;
+        }
+        else
+        {
+            if (level.IsComplete())
+            {
+                selectedLevel = level;
+                return;
+            }
+        }
+        Debug.Log("You must complete the current Level to progress.");
     }
 
     private void LoadLevel()

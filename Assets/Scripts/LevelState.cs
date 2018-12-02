@@ -23,4 +23,8 @@ public class LevelState : MonoBehaviour {
     public LevelState RightState { get { return rightState; } }
     public LevelState DownState { get { return downState; } }
 
+    public bool IsComplete()
+    {
+        return PreferencesManager.Instance.IsLevelCompleted(levelName);
+    }
 }
