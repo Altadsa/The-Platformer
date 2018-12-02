@@ -51,4 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6655cbc4dcd2a45b48c609eb63580d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLeft: 300
   coinsCollected: 0
+  score: 0

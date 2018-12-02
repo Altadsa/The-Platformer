@@ -11,7 +11,7 @@ public class StateController : MonoBehaviour
     {
         if (!selectedLevel)
         {
-            selectedLevel = transform.GetChild(0).GetComponent<LevelState>();
+            selectedLevel = transform.GetChild(0).GetChild(0).GetComponent<LevelState>();
             player.transform.position = selectedLevel.transform.position;
         }
     }

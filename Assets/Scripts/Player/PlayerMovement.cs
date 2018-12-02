@@ -7,6 +7,15 @@ public class PlayerMovement : MonoBehaviour {
     public BoxCollider2D playerFeet;
 
     public float moveSpeed, jumpPower;
+    bool jump = false;
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -49,8 +58,9 @@ public class PlayerMovement : MonoBehaviour {
         bool isTouchingForeground = playerFeet.IsTouchingLayers(LayerMask.GetMask("Foreground"));
         if (isTouchingForeground)
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            if (jump)
             {
+                jump = false;
                 Vector2 jumpForce = new Vector2(0, jumpPower * Time.fixedDeltaTime);
                 playerRB.velocity += jumpForce;
             }
