@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         ChangeDirection();
     }
@@ -38,15 +38,15 @@ public class Enemy : MonoBehaviour {
         bool isHeadHit = head.IsTouchingLayers(LayerMask.GetMask("Player"));
         if (isHeadHit)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
     private void ChangeDirection()
     {
         speed = -speed;
-        //Vector3 newLocalScale = transform.localScale;
-        //newLocalScale.x = -newLocalScale.x;
-        //transform.localScale = newLocalScale;
+        Vector3 newLocalScale = transform.localScale;
+        newLocalScale.x = -newLocalScale.x;
+        transform.localScale = newLocalScale;
     }
 }
