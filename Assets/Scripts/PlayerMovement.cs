@@ -16,16 +16,30 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Move()
     {
+        MoveIfHasInput();
+    }
+
+    private void MoveIfHasInput()
+    {
         float xControlThrow = Input.GetAxisRaw("Horizontal");
-        float moveX = xControlThrow * moveSpeed * Time.fixedDeltaTime;
-        Vector2 moveForce = new Vector2(moveX, 0.0f);
-        playerRB.AddForce(moveForce);
-        ClampPlayerVelocity();
+        bool hasVelocity = Mathf.Abs(xControlThrow) > Mathf.Epsilon;
+        if (hasVelocity)
+        {
+            float moveX = xControlThrow * moveSpeed * Time.fixedDeltaTime;
+            Vector2 moveForce = new Vector2(moveX, 0.0f);
+            playerRB.AddForce(moveForce);
+            ClampPlayerVelocity();
+        }
+        else
+        {
+            Vector2 noHorizontalMovement = new Vector2(0, playerRB.velocity.y);
+            playerRB.velocity = noHorizontalMovement;
+        }
     }
 
     private void ClampPlayerVelocity()
     {
-        float clampX = Mathf.Clamp(playerRB.velocity.x, -25, 25);
+        float clampX = Mathf.Clamp(playerRB.velocity.x, -10, 10);
         float clampY = Mathf.Clamp(playerRB.velocity.y, -50, 50);
         playerRB.velocity = new Vector2(clampX, clampY);
     }

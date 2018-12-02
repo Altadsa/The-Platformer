@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class LevelEnd : MonoBehaviour {
+
+    public GameObject levelEndPanel;
 
     public GameObject player;
 
@@ -10,7 +11,7 @@ public class LevelEnd : MonoBehaviour {
     {
         if (collision.gameObject == player)
         {
-            GameManager.Instance.EndGame();
+            levelEndPanel.SetActive(true);
         }
     }
 }

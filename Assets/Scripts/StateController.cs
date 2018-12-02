@@ -19,6 +19,12 @@ public class StateController : MonoBehaviour
     void Update()
     {
         SelectLevelState();
+        FindObjectOfType<LevelSelectionUI>().UpdateText();
+    }
+
+    public string GetLevelName()
+    {
+        return selectedLevel.LevelName;
     }
 
     private void SelectLevelState()

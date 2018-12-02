@@ -23,15 +23,22 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
+        string nextLevel = GetNextLevel();
+        LevelManager.Instance.LoadLevel(nextLevel);
+    }
+
+    private string GetNextLevel()
+    {
+        string nextLevelString = "";
         string[] regionAndLevel = FindObjectOfType<LevelStartScreen>().GetLevelName();
         if (regionAndLevel.Length == 2)
         {
             int nextLevel = int.Parse(regionAndLevel[1]);
             nextLevel++;
             regionAndLevel[1] = nextLevel.ToString();
-            string nextLevelString = string.Concat(regionAndLevel[0] + "_0" + regionAndLevel[1]);
-            LevelManager.Instance.LoadLevel(nextLevelString);
+            nextLevelString = string.Concat(regionAndLevel[0] + "_0" + regionAndLevel[1]);
         }
+        return nextLevelString;
     }
 
     private void Awake()
