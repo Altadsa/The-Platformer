@@ -78,9 +78,9 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator AddCoinsToScore()
     {
-        while (coinsCollected > 1)
+        while (coinsCollected > 0)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             coinsCollected--;
             score += 100; 
         }
