@@ -70,6 +70,17 @@ public class GameManager : MonoBehaviour {
         ConvertCoinsToScore();
     }
 
+    public void OnLevelComplete()
+    {
+        int scorePerCoin = 100;
+        for (int i = 0; i < coinsCollected; i++)
+        {
+            score += scorePerCoin;
+        }
+        onCoinsChanged.Raise();
+        onScoreChanged.Raise();
+    }
+
     public void ConvertCoinsToScore()
     {
         isGameOver = true;
@@ -103,7 +114,7 @@ public class GameManager : MonoBehaviour {
     {
         while (coinsCollected > 0)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
             coinsCollected--;
             score += 100;
             onCoinsChanged.Raise();

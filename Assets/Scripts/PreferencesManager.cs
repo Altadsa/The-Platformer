@@ -73,4 +73,9 @@ public class PreferencesManager : MonoBehaviour {
         string key = string.Concat(scorePrefix, levelName);
         PlayerPrefs.SetInt(key, scoreToSet);
     }
+
+    public void ClearProgress()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
