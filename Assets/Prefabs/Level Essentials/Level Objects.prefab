@@ -954,7 +954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerHealthChanged: {fileID: 11400000, guid: 97920e7e9dc77a3408e1bb27c29def57,
     type: 2}
-  onPlayerDeath: {fileID: 0}
+  onPlayerDeath: {fileID: 11400000, guid: c4e45792cf50e634fb92eeec8c58aaa5, type: 2}
 --- !u!114 &114755552020137068
 MonoBehaviour:
   m_ObjectHideFlags: 1

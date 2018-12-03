@@ -15,6 +15,7 @@ public class LevelEnd : MonoBehaviour {
         if (triggersLeft < 1) { return; }
         if (collision.gameObject == player)
         {
+            triggersLeft--;
             GameManager.Instance.OnLevelEnd();
             onLevelEnd.Raise();
         }

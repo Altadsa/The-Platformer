@@ -112,7 +112,6 @@ public class StateController : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("You must complete the current Level to progress.");
     }
 
     private void LoadLevel()

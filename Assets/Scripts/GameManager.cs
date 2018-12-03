@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
     public void OnLevelEnd()
     {
         AddTimeToScore();
-        AddCoinsToScore();
+        ConvertCoinsToScore();
     }
 
     public void ConvertCoinsToScore()
