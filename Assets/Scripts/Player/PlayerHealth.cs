@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
+using GEV;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField]
+    ScriptableEvent onPlayerHealthChanged;
 
     public CapsuleCollider2D playerBody;
 
     public static int health = 3;
-    int maxHealth = 3;
+    const int maxHealth = 3;
 
+    public void OnLevelStart()
+    {
+        health = maxHealth;
+        onPlayerHealthChanged.Raise();
+    }
 
     private void Update()
     {
@@ -20,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
         if (isTouchingHazards)
         {
             health = 0;
+            onPlayerHealthChanged.Raise();
             LevelManager.Instance.ResetLevel();
         }
     }
@@ -27,9 +36,10 @@ public class PlayerHealth : MonoBehaviour
     public void DecreaseHealth()
     {
         health--;
+        onPlayerHealthChanged.Raise();
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -38,6 +48,7 @@ public class PlayerHealth : MonoBehaviour
         if (health < maxHealth)
         {
             health++;
+            onPlayerHealthChanged.Raise();
         }
 
     }

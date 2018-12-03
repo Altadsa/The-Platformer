@@ -9,7 +9,8 @@ public class StateController : MonoBehaviour
 
     private void Start()
     {
-        if (!selectedLevel)
+        selectedLevel = GetCurrentLevelState();
+        if (selectedLevel == null)
         {
             selectedLevel = transform.GetChild(0).GetChild(0).GetComponent<LevelState>();
             player.transform.position = selectedLevel.transform.position;
@@ -25,6 +26,22 @@ public class StateController : MonoBehaviour
     public string GetLevelName()
     {
         return selectedLevel.LevelName;
+    }
+
+    private LevelState GetCurrentLevelState()
+    {
+        string currentLevelName = PreferencesManager.Instance.GetCurrentLevel();
+        foreach (Transform child in transform)
+        {
+            foreach (Transform greatChild in child)
+            {
+                if (greatChild.GetComponent<LevelState>().LevelName == currentLevelName)
+                {
+                    return greatChild.GetComponent<LevelState>();
+                }
+            }
+        }
+        return null;
     }
 
     private void SelectLevelState()

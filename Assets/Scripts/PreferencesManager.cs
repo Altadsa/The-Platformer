@@ -2,6 +2,7 @@
 
 public class PreferencesManager : MonoBehaviour {
 
+    string currentLevelPrefix = "_C";
     string levelPrefix = "_L";
     string scorePrefix = "_S";
 
@@ -32,6 +33,13 @@ public class PreferencesManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    public string GetCurrentLevel()
+    {
+        string currentLevel = PlayerPrefs.GetString(currentLevelPrefix);
+        if (currentLevel == null) { return null; }
+        return currentLevel;
+    }
+
     public bool IsLevelCompleted(string levelName)
     {
         string key = string.Concat(levelPrefix, levelName);
@@ -46,6 +54,12 @@ public class PreferencesManager : MonoBehaviour {
     {
         string key = string.Concat(scorePrefix, levelName);
         return PlayerPrefs.GetInt(key);
+    }
+
+    public void OnLevelComplete(string levelName)
+    {
+        string key = currentLevelPrefix;
+        PlayerPrefs.SetString(key, levelName);
     }
 
     public void UnlockLevel(string levelName)

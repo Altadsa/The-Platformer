@@ -9,7 +9,7 @@ public class HealthUI : MonoBehaviour {
 
     public PlayerHealth player;
 
-    private void Update()
+    public void OnPlayerHealthChanged()
     {
         UpdateHealthUI();
     }
@@ -18,24 +18,16 @@ public class HealthUI : MonoBehaviour {
     {
         if (!player) { return; }
         if (PlayerHealth.health < 0) { return; }
-        bool active = true;
 
         for (int i = 0; i < healthImages.Length; i++)
         {
-            if (!active)
+            if (PlayerHealth.health > i)
             {
-                healthImages[i].sprite = sprites[0];
+                healthImages[i].sprite = sprites[1];
             }
             else
             {
-                if (PlayerHealth.health >= i)
-                {
-                    healthImages[i].sprite = sprites[1];
-                }
-                else
-                {
-                    active = false;
-                }
+                healthImages[i].sprite = sprites[0];
             }
         }
     }

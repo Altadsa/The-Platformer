@@ -40,9 +40,11 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
-        PreferencesManager.Instance.UnlockLevel(LevelManager.Instance.GetLevelName());
-        PreferencesManager.Instance.SetLevelScore(LevelManager.Instance.GetLevelName(), score);
-        string nextLevel = GetNextLevel();
+        string levelName = LevelManager.Instance.GetLevelName();
+        PreferencesManager.Instance.OnLevelComplete(levelName);
+        PreferencesManager.Instance.UnlockLevel(levelName);
+        PreferencesManager.Instance.SetLevelScore(levelName, score);
+        string nextLevel = "00_01";
         LevelManager.Instance.LoadLevel(nextLevel);
     }
 
@@ -55,20 +57,6 @@ public class GameManager : MonoBehaviour {
     public void AddTimeToScore()
     {
         score += (10 * (int)timeLeft);
-    }
-
-    private string GetNextLevel()
-    {
-        string nextLevelString = "";
-        string[] regionAndLevel = FindObjectOfType<LevelStartScreen>().GetLevelName();
-        if (regionAndLevel.Length == 2)
-        {
-            int nextLevel = int.Parse(regionAndLevel[1]);
-            nextLevel++;
-            regionAndLevel[1] = nextLevel.ToString();
-            nextLevelString = string.Concat(regionAndLevel[0] + "_0" + regionAndLevel[1]);
-        }
-        return nextLevelString;
     }
 
     private void Awake()
