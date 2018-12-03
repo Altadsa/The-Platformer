@@ -1,23 +1,40 @@
 ﻿using UnityEngine;
+using GEV;
 
 public class Enemy : MonoBehaviour {
+
+    [SerializeField]
+    EnemyEvent onPlayerHit;
 
     public CapsuleCollider2D body;
     public BoxCollider2D head;
     public Rigidbody2D enemyRB;
 
-    public float speed;
+    [SerializeField]
+    float speed;
 
     bool isActive;
 
+    float timeElapsed, attackCD;
+
     private void OnBecameVisible()
     {
+        attackCD = 1.5f;
+        timeElapsed = attackCD;
         isActive = true;
     }
 
     private void OnBecameInvisible()
     {
         isActive = false;
+    }
+
+    private void Update()
+    {
+        if (timeElapsed < attackCD)
+        {
+            timeElapsed += Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -29,9 +46,27 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        DamagePlayer();
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         ChangeDirection();
+    }
+
+    private void DamagePlayer()
+    {
+        bool touchingPlayer = body.IsTouchingLayers(LayerMask.GetMask("Player"));
+        if (touchingPlayer)
+        {
+            if (timeElapsed >= attackCD)
+            {
+                timeElapsed = 0;
+                onPlayerHit.Raise(this);
+            }
+        }
     }
 
     private void KillIfHitOnHead()
@@ -40,15 +75,6 @@ public class Enemy : MonoBehaviour {
         if (isHeadHit)
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void DamagePlayer()
-    {
-        bool isTouchingPlayer = body.IsTouchingLayers(LayerMask.GetMask("Player"));
-        if (isTouchingPlayer)
-        {
-            FindObjectOfType<PlayerHealth>().DecreaseHealth();
         }
     }
 

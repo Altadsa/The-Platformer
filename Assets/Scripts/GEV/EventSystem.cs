@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace GEV
 {
-    public class EventSystem : MonoBehaviour
+    public class EventSystem : EventSystem<EventListener> { }
+
+    public abstract class EventSystem<T> : MonoBehaviour
+        where T : IEventListener
     {
         [HideInInspector]
-        public List<EventListener> listeners = new List<EventListener>();
+        public List<T> listeners = new List<T>();
 
         private void OnEnable()
         {

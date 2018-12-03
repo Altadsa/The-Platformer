@@ -283,7 +283,7 @@ Prefab:
       objectReference: {fileID: 1395912522}
     - target: {fileID: 4280257027261828, guid: 926beb13000d29a4b8a173608c0160cb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 17.258532
+      value: 17.266027
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 926beb13000d29a4b8a173608c0160cb, type: 2}
@@ -348,15 +348,43 @@ Prefab:
       propertyPath: levelEndPanel
       value: 
       objectReference: {fileID: 746401004}
-    - target: {fileID: 114605486474576116, guid: 3749c1f163bb6c7449dc4fc0d94da94c,
-        type: 2}
-      propertyPath: onPlayerHealthChanged
-      value: 
-      objectReference: {fileID: 11400000, guid: 97920e7e9dc77a3408e1bb27c29def57,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3749c1f163bb6c7449dc4fc0d94da94c, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1286759181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1588960524514746, guid: 9a51c4508a4ba6248b3c013797951d75,
+    type: 2}
+  m_PrefabInternal: {fileID: 1467265237}
+--- !u!114 &1286759183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1286759181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476a11ea228d3714e9ab28dae8054561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - _Event: {fileID: 11400000, guid: 97920e7e9dc77a3408e1bb27c29def57, type: 2}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1467265238}
+          m_MethodName: OnPlayerHealthChanged
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!66 &1395912522 stripped
 CompositeCollider2D:
   m_CorrespondingSourceObject: {fileID: 66565264075954688, guid: 3749c1f163bb6c7449dc4fc0d94da94c,
@@ -641,8 +669,7 @@ Prefab:
         type: 2}
       propertyPath: listeners.Array.data[1]._Event
       value: 
-      objectReference: {fileID: 11400000, guid: 97920e7e9dc77a3408e1bb27c29def57,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114315553701299894, guid: 9a51c4508a4ba6248b3c013797951d75,
         type: 2}
       propertyPath: listeners.Array.data[1].response.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -674,7 +701,8 @@ Prefab:
       propertyPath: listeners.Array.data[1].response.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114315553701299894, guid: 9a51c4508a4ba6248b3c013797951d75, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 9a51c4508a4ba6248b3c013797951d75, type: 2}
   m_IsPrefabAsset: 0
 --- !u!114 &1467265238 stripped
@@ -741,6 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66bfaa17ec0f7d443b213f3da20612bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPlayerHit: {fileID: 11400000, guid: db626813a732c254f8c951ca1ceb36a4, type: 2}
   body: {fileID: 1702394322}
   head: {fileID: 1702394320}
   enemyRB: {fileID: 1702394318}
@@ -782,7 +811,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.65, y: -0.65}
+  m_Offset: {x: 0.5, y: -0.65}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}

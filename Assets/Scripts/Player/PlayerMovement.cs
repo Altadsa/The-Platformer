@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour {
     public CapsuleCollider2D playerBody;
     public BoxCollider2D playerFeet;
 
+    public Vector2 knockbackForce;
+
     public float moveSpeed, jumpPower;
     bool jump = false;
 
@@ -21,6 +23,11 @@ public class PlayerMovement : MonoBehaviour {
     {
         Move();
         Jump();
+    }
+
+    public void OnPlayerHit(Enemy attacker)
+    {
+        KnockPlayerBack(attacker);
     }
 
     private void Move()
@@ -41,8 +48,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
         {
-            Vector2 noHorizontalMovement = new Vector2(0, playerRB.velocity.y);
-            playerRB.velocity = noHorizontalMovement;
+            StopPlayerMovement();
         }
     }
 
@@ -65,6 +71,21 @@ public class PlayerMovement : MonoBehaviour {
                 playerRB.velocity += jumpForce;
             }
         }
+    }
+
+    private void StopPlayerMovement()
+    {
+        Vector2 noHorizontalMovement = new Vector2(0, playerRB.velocity.y);
+        playerRB.velocity = noHorizontalMovement;
+    }
+
+    private void KnockPlayerBack(Enemy attacker)
+    {
+        float attackerX = attacker.transform.position.x;
+        float direction = Mathf.Sign(transform.position.x - attackerX);
+        knockbackForce.x = knockbackForce.x * direction;
+        StopPlayerMovement();
+        playerRB.AddForce(knockbackForce);
     }
 
 }

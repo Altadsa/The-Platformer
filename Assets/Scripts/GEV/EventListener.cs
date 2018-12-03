@@ -2,8 +2,15 @@
 
 namespace GEV
 {
+    public interface IEventListener
+    {
+        void Register();
+
+        void Unregister();
+    }
+
     [System.Serializable]
-    public class EventListener
+    public class EventListener : IEventListener
     {
 
         public ScriptableEvent _Event;
@@ -25,4 +32,7 @@ namespace GEV
             response.Invoke();
         }
     }
+
+    [System.Serializable]
+    public class UnityGameEvent : UnityEvent { }
 }
