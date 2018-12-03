@@ -1,9 +1,10 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine;
+using GEV;
 
 public class LevelEnd : MonoBehaviour {
 
-    public GameObject levelEndPanel;
+    [SerializeField]
+    ScriptableEvent onLevelEnd;
 
     public GameObject player;
 
@@ -14,10 +15,8 @@ public class LevelEnd : MonoBehaviour {
         if (triggersLeft < 1) { return; }
         if (collision.gameObject == player)
         {
-            triggersLeft--;
-            GameManager.Instance.ConvertCoinsToScore();
-            GameManager.Instance.AddTimeToScore();
-            levelEndPanel.SetActive(true);
+            GameManager.Instance.OnLevelEnd();
+            onLevelEnd.Raise();
         }
     }
 }

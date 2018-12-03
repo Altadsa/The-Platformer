@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4553522406770220}
   - component: {fileID: 114594866065519384}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Enemy Event System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +266,7 @@ Transform:
   m_Children:
   - {fileID: 4339766426652100}
   m_Father: {fileID: 4311588683588580}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4311588683588580
 Transform:
@@ -279,12 +279,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4004837946432576}
+  - {fileID: 4553522406770220}
   - {fileID: 4950693387042060}
   - {fileID: 4636535173245984}
   - {fileID: 4908103882422634}
   - {fileID: 4312696235453820}
   - {fileID: 4098390314990616}
-  - {fileID: 4553522406770220}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -299,7 +299,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4311588683588580}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4339766426652100
 Transform:
@@ -325,7 +325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4311588683588580}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4600963587387046
 Transform:
@@ -364,7 +364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4311588683588580}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4655263480956984
 Transform:
@@ -403,7 +403,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4311588683588580}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4950693387042060
 Transform:
@@ -420,7 +420,7 @@ Transform:
   - {fileID: 4616136204388020}
   - {fileID: 4600963587387046}
   m_Father: {fileID: 4311588683588580}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50301383659079652
 Rigidbody2D:
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aae3e20e891c6d48bf11c781bae095b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelEndPanel: {fileID: 0}
+  onLevelEnd: {fileID: 11400000, guid: d7f26f29fc6b15d49b3a355674a08404, type: 2}
   player: {fileID: 1574156683591110}
 --- !u!114 &114259140012707022
 MonoBehaviour:
@@ -859,6 +859,34 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+  - _Event: {fileID: 11400000, guid: c4e45792cf50e634fb92eeec8c58aaa5, type: 2}
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: OnPlayerDeath
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 114290384680374010}
+          m_MethodName: OnPlayerDeath
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!114 &114290384680374010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -870,9 +898,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bdc408e1187fe44830c712ee51b5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRB: {fileID: 50804857678006546}
-  playerBody: {fileID: 70948374802610026}
-  playerFeet: {fileID: 61358899821641296}
   knockbackForce: {x: 1000, y: 330}
   moveSpeed: 1000
   jumpPower: 1000
@@ -929,7 +954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerHealthChanged: {fileID: 11400000, guid: 97920e7e9dc77a3408e1bb27c29def57,
     type: 2}
-  playerBody: {fileID: 70948374802610026}
+  onPlayerDeath: {fileID: 0}
 --- !u!114 &114755552020137068
 MonoBehaviour:
   m_ObjectHideFlags: 1

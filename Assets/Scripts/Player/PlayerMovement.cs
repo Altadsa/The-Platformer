@@ -2,14 +2,22 @@
 
 public class PlayerMovement : MonoBehaviour {
 
-    public Rigidbody2D playerRB;
-    public CapsuleCollider2D playerBody;
-    public BoxCollider2D playerFeet;
+    Rigidbody2D playerRB;
+    CapsuleCollider2D playerBody;
+    BoxCollider2D playerFeet;
 
     public Vector2 knockbackForce;
 
     public float moveSpeed, jumpPower;
     bool jump = false;
+    bool isDead = false;
+
+    private void Awake()
+    {
+        playerRB = GetComponent<Rigidbody2D>();
+        playerBody = GetComponent<CapsuleCollider2D>();
+        playerFeet = GetComponent<BoxCollider2D>();
+    }
 
     private void Update()
     {
@@ -21,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        if (isDead) { return; }
         Move();
         Jump();
     }
@@ -28,6 +37,11 @@ public class PlayerMovement : MonoBehaviour {
     public void OnPlayerHit(Enemy attacker)
     {
         KnockPlayerBack(attacker);
+    }
+
+    public void OnPlayerDeath()
+    {
+        isDead = true;
     }
 
     private void Move()

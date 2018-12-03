@@ -9,7 +9,7 @@ public class Coin : MonoBehaviour {
         if (triggersLeft > 0)
         {
             triggersLeft--;
-            GameManager.Instance.coinsCollected++;
+            GameManager.Instance.AddCoin();
             Destroy(gameObject); 
         }
     }

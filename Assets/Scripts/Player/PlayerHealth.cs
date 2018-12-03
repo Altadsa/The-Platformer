@@ -6,13 +6,17 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     ScriptableEvent onPlayerHealthChanged;
 
-    public CapsuleCollider2D playerBody;
+    [SerializeField]
+    ScriptableEvent onPlayerDeath;
 
-    public static int health = 3;
+    CapsuleCollider2D playerBody;
+
+    int health = 3;
     const int maxHealth = 3;
 
-    public void OnLevelStart()
+    private void Awake()
     {
+        playerBody = GetComponent<CapsuleCollider2D>();
         health = maxHealth;
         onPlayerHealthChanged.Raise();
     }
@@ -29,9 +33,11 @@ public class PlayerHealth : MonoBehaviour
         {
             health = 0;
             onPlayerHealthChanged.Raise();
-            LevelManager.Instance.ResetLevel();
+            onPlayerDeath.Raise();
         }
     }
+
+    public int Health { get { return health; } }
 
     public void DecreaseHealth()
     {
@@ -39,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
         onPlayerHealthChanged.Raise();
         if (health <= 0)
         {
-            //Destroy(gameObject);
+            onPlayerDeath.Raise();
         }
     }
 

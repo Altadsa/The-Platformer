@@ -51,6 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6655cbc4dcd2a45b48c609eb63580d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 300
-  coinsCollected: 0
-  score: 0
+  onCoinsChanged: {fileID: 11400000, guid: 40f7d727eddb39746a77807738175995, type: 2}
+  onScoreChanged: {fileID: 11400000, guid: 3a01e55e02458d64cbe8c95e262851ce, type: 2}

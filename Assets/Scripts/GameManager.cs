@@ -1,11 +1,18 @@
 ﻿using System.Collections;
+using GEV;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public float timeLeft = 300;
-    public int coinsCollected = 0;
-    public int score = 0;
+    [SerializeField]
+    ScriptableEvent onCoinsChanged;
+
+    [SerializeField]
+    ScriptableEvent onScoreChanged;
+
+    float timeLeft = 300;
+    int coinsCollected = 0;
+    int score = 0;
 
     bool isGameOver;
 
@@ -38,6 +45,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public float TimeLeft { get { return timeLeft; } }
+    public int Coins { get { return coinsCollected; } }
+    public int Score { get { return score; } }
+
     public void EndGame()
     {
         string levelName = LevelManager.Instance.GetLevelName();
@@ -46,6 +57,17 @@ public class GameManager : MonoBehaviour {
         PreferencesManager.Instance.SetLevelScore(levelName, score);
         string nextLevel = "00_01";
         LevelManager.Instance.LoadLevel(nextLevel);
+    }
+
+    public void OnPlayerDeath()
+    {
+        LevelManager.Instance.ResetLevel();
+    }
+
+    public void OnLevelEnd()
+    {
+        AddTimeToScore();
+        AddCoinsToScore();
     }
 
     public void ConvertCoinsToScore()
@@ -57,6 +79,19 @@ public class GameManager : MonoBehaviour {
     public void AddTimeToScore()
     {
         score += (10 * (int)timeLeft);
+        onScoreChanged.Raise();
+    }
+
+    public void AddScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        onScoreChanged.Raise();
+    }
+
+    public void AddCoin()
+    {
+        coinsCollected++;
+        onCoinsChanged.Raise();
     }
 
     private void Awake()
@@ -70,7 +105,9 @@ public class GameManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(0.5f);
             coinsCollected--;
-            score += 100; 
+            score += 100;
+            onCoinsChanged.Raise();
+            onScoreChanged.Raise();
         }
     }
 }

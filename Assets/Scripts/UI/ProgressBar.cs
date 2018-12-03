@@ -3,16 +3,26 @@ using UnityEngine;
 
 public class ProgressBar : MonoBehaviour {
 
-    public Slider progressBar;
-    public GameObject levelStart;
-    public GameObject player;
-    public GameObject levelEnd;
+    [SerializeField]
+    Slider progressBar;
+
+    GameObject levelStart;
+    GameObject player;
+    GameObject levelEnd;
 
     float distance;
 
     private void Awake()
     {
+        FindGOs();
         MeasureDistance();
+    }
+
+    private void FindGOs()
+    {
+        levelStart = FindObjectOfType<LevelStart>().gameObject;
+        levelEnd = FindObjectOfType<LevelEnd>().gameObject;
+        player = FindObjectOfType<PlayerMovement>().gameObject;
     }
 
     private void Update()

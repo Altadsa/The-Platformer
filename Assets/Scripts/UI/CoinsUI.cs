@@ -3,11 +3,18 @@ using UnityEngine;
 
 public class CoinsUI : MonoBehaviour {
 
-    public TMP_Text coinUIText;
+    [SerializeField]
+    TMP_Text coinUIText;
 
     string text = "x";
 
-	void Update () {
-        coinUIText.text = text + GameManager.Instance.coinsCollected;
+    private void Awake()
+    {
+        coinUIText.text = text + GameManager.Instance.Coins;
+    }
+
+    public void OnCoinsChanged()
+    {
+        coinUIText.text = text + GameManager.Instance.Coins;
 	}
 }

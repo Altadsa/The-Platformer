@@ -7,7 +7,12 @@ public class HealthUI : MonoBehaviour {
 
     public Sprite[] sprites;
 
-    public PlayerHealth player;
+    PlayerHealth player;
+
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerHealth>();
+    }
 
     public void OnPlayerHealthChanged()
     {
@@ -17,11 +22,11 @@ public class HealthUI : MonoBehaviour {
     private void UpdateHealthUI()
     {
         if (!player) { return; }
-        if (PlayerHealth.health < 0) { return; }
+        if (player.Health < 0) { return; }
 
         for (int i = 0; i < healthImages.Length; i++)
         {
-            if (PlayerHealth.health > i)
+            if (player.Health > i)
             {
                 healthImages[i].sprite = sprites[1];
             }
