@@ -20,6 +20,7 @@ public class LevelStartScreen : MonoBehaviour {
 
     private void SetText()
     {
+        if (!LevelManager.Instance) { return; }
         textToSet = LevelManager.Instance.GetLevelName();
         string[] arr = textToSet.Split('_');
         levelName.text = "Region: " + arr[0] + "\nLevel: " + arr[1];
