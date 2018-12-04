@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour {
         PreferencesManager.Instance.UnlockLevel(levelName);
         PreferencesManager.Instance.SetLevelScore(levelName, score);
         string nextLevel = "00_01";
+        StopAllCoroutines();
         LevelManager.Instance.LoadLevel(nextLevel);
     }
 
