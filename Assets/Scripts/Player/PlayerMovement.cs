@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update()
     {
+        ChangeDirection();
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
@@ -85,6 +86,14 @@ public class PlayerMovement : MonoBehaviour {
                 playerRB.velocity += jumpForce;
             }
         }
+    }
+
+    private void ChangeDirection()
+    {
+        float direction = playerRB.velocity.x;
+        Vector2 tLocalScale = transform.localScale;
+        tLocalScale.x = Mathf.Sign(direction);
+        transform.localScale = tLocalScale;
     }
 
     private void StopPlayerMovement()
