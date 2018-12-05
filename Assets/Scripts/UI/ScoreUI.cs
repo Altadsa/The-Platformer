@@ -11,7 +11,7 @@ public class ScoreUI : MonoBehaviour {
         scoreText.text = "Score: " + GameManager.Instance.Score;
     }
 
-    public void OnScoreChanged()
+    public void OnUIUpdated()
     {
         scoreText.text = "Score: " + GameManager.Instance.Score;
 	}

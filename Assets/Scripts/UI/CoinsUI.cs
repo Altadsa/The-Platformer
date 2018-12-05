@@ -13,7 +13,7 @@ public class CoinsUI : MonoBehaviour {
         coinUIText.text = text + GameManager.Instance.Coins;
     }
 
-    public void OnCoinsChanged()
+    public void OnUIUpdated()
     {
         coinUIText.text = text + GameManager.Instance.Coins;
 	}

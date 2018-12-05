@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour {
     [SerializeField]
     EnemyEvent onPlayerHit;
 
+    public int scoreValue = 100;
+
     public CapsuleCollider2D body;
     public BoxCollider2D head;
     public Rigidbody2D enemyRB;
@@ -74,7 +76,7 @@ public class Enemy : MonoBehaviour {
         bool isHeadHit = head.IsTouchingLayers(LayerMask.GetMask("Player"));
         if (isHeadHit)
         {
-            GameManager.Instance.AddScore(100);
+            GameManager.Instance.AddScore(scoreValue);
             Destroy(gameObject);
         }
     }

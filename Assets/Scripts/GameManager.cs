@@ -5,10 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     [SerializeField]
-    ScriptableEvent onCoinsChanged;
-
-    [SerializeField]
-    ScriptableEvent onScoreChanged;
+    ScriptableEvent onUIUpdated;
 
     float timeLeft = 300;
     int coinsCollected = 0;
@@ -78,8 +75,7 @@ public class GameManager : MonoBehaviour {
         {
             score += scorePerCoin;
         }
-        onCoinsChanged.Raise();
-        onScoreChanged.Raise();
+        onUIUpdated.Raise();
     }
 
     public void ConvertCoinsToScore()
@@ -91,19 +87,19 @@ public class GameManager : MonoBehaviour {
     public void AddTimeToScore()
     {
         score += (10 * (int)timeLeft);
-        onScoreChanged.Raise();
+        onUIUpdated.Raise();
     }
 
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        onScoreChanged.Raise();
+        onUIUpdated.Raise();
     }
 
     public void AddCoin()
     {
         coinsCollected++;
-        onCoinsChanged.Raise();
+        onUIUpdated.Raise();
     }
 
     private void Awake()
@@ -118,8 +114,7 @@ public class GameManager : MonoBehaviour {
             yield return new WaitForSeconds(0.25f);
             coinsCollected--;
             score += 100;
-            onCoinsChanged.Raise();
-            onScoreChanged.Raise();
+            onUIUpdated.Raise();
         }
     }
 }
