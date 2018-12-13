@@ -61,6 +61,6 @@ public class LevelManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(2.0f);
         string levelName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadSceneAsync(levelName);
     }
 }

@@ -68,3 +68,6 @@ TagManager:
   - name: Foreground
     uniqueID: 2398529487
     locked: 0
+  - name: Screen Clutter
+    uniqueID: 1856607615
+    locked: 0
