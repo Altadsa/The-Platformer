@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
     float timeLeft = 300;
     int coinsCollected = 0;
+    int enemiesKilled = 0;
     int score = 0;
 
     bool isGameOver;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour {
 
     public float TimeLeft { get { return timeLeft; } }
     public int Coins { get { return coinsCollected; } }
+    public int Enemies { get { return enemiesKilled; } }
     public int Score { get { return score; } }
 
     public void EndGame()
@@ -70,11 +72,13 @@ public class GameManager : MonoBehaviour {
 
     public void OnLevelComplete()
     {
+        StopAllCoroutines();
         int scorePerCoin = 100;
         for (int i = 0; i < coinsCollected; i++)
         {
             score += scorePerCoin;
         }
+        coinsCollected = 0;
         onUIUpdated.Raise();
     }
 
@@ -90,9 +94,10 @@ public class GameManager : MonoBehaviour {
         onUIUpdated.Raise();
     }
 
-    public void AddScore(int scoreToAdd)
+    public void OnEnemyDeath(int enemyScoreValue)
     {
-        score += scoreToAdd;
+        score += enemyScoreValue;
+        enemiesKilled++;
         onUIUpdated.Raise();
     }
 

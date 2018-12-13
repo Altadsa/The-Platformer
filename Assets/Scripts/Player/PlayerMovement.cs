@@ -12,6 +12,12 @@ public class PlayerMovement : MonoBehaviour {
     bool jump = false;
     bool isDead = false;
 
+    Layers[] jumpLayers = new Layers[]
+    {
+        Layers.Platforms,
+        Layers.Foreground
+    };
+
     private void Awake()
     {
         playerRB = GetComponent<Rigidbody2D>();
@@ -76,8 +82,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Jump()
     {
-        bool isTouchingForeground = playerFeet.IsTouchingLayers(LayerMask.GetMask("Foreground"));
-        if (isTouchingForeground)
+        bool canJump = CanPlayerJump();
+        if (canJump)
         {
             if (jump)
             {
@@ -86,6 +92,19 @@ public class PlayerMovement : MonoBehaviour {
                 playerRB.velocity += jumpForce;
             }
         }
+    }
+
+    private bool CanPlayerJump()
+    {
+        foreach (Layers layer in jumpLayers)
+        {
+            int layerMask = 1 << (int)layer;
+            if (playerFeet.IsTouchingLayers(layerMask))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void ChangeDirection()

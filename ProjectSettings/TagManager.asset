@@ -20,7 +20,7 @@ TagManager:
   - Enemies
   - Player
   - Foreground
-  - 
+  - Platforms
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Level States
     uniqueID: 1154060617
+    locked: 0
+  - name: Platforms
+    uniqueID: 322301667
     locked: 0
   - name: Hazards
     uniqueID: 2676646483

@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour {
         bool isHeadHit = head.IsTouchingLayers(LayerMask.GetMask("Player"));
         if (isHeadHit)
         {
-            GameManager.Instance.AddScore(scoreValue);
+            GameManager.Instance.OnEnemyDeath(scoreValue);
             Destroy(gameObject);
         }
     }
