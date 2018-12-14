@@ -2,18 +2,18 @@
 
 public class StateController : MonoBehaviour
 {
-
-    public GameObject player;
+    Transform player;
 
     LevelState selectedLevel;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         selectedLevel = GetCurrentLevelState();
         if (selectedLevel == null)
         {
             selectedLevel = transform.GetChild(0).GetChild(0).GetComponent<LevelState>();
-            player.transform.position = selectedLevel.transform.position;
+            player.position = selectedLevel.transform.position;
         }
     }
 
@@ -47,7 +47,7 @@ public class StateController : MonoBehaviour
     private void SelectLevelState()
     {
         HandleKeyboardInput();
-        player.transform.position = selectedLevel.transform.position;
+        player.position = selectedLevel.transform.position;
     }
 
     private void HandleKeyboardInput()

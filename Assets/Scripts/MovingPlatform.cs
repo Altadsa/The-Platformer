@@ -8,6 +8,12 @@ public class MovingPlatform : MonoBehaviour {
 
     Transform playerParent;
 
+    Layer[] collisionLayers = new Layer[]
+    {
+        Layer.Foreground,
+        Layer.Platforms
+    };
+
     private void Update()
     {
         MovePlatform();
@@ -42,10 +48,9 @@ public class MovingPlatform : MonoBehaviour {
 
     private void ChangeDirection()
     {
-        bool isTouchingForeground = triggerCollider.IsTouchingLayers(LayerMask.GetMask("Foreground"));
-        if (isTouchingForeground)
+        bool hasCollided = Layers.IsColliderTouchingLayers(triggerCollider, collisionLayers);
+        if (hasCollided)
         {
-
             FlipPlatform();
         }
     }

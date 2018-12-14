@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour {
     bool jump = false;
     bool isDead = false;
 
-    Layers[] jumpLayers = new Layers[]
+    Layer[] jumpLayers = new Layer[]
     {
-        Layers.Platforms,
-        Layers.Foreground
+        Layer.Platforms,
+        Layer.Foreground
     };
 
     private void Awake()
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Jump()
     {
-        bool canJump = CanPlayerJump();
+        bool canJump = Layers.IsColliderTouchingLayers(playerFeet, jumpLayers);
         if (canJump)
         {
             if (jump)
@@ -92,19 +92,6 @@ public class PlayerMovement : MonoBehaviour {
                 playerRB.velocity += jumpForce;
             }
         }
-    }
-
-    private bool CanPlayerJump()
-    {
-        foreach (Layers layer in jumpLayers)
-        {
-            int layerMask = 1 << (int)layer;
-            if (playerFeet.IsTouchingLayers(layerMask))
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void ChangeDirection()
