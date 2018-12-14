@@ -38,7 +38,8 @@ public class LevelManager : MonoBehaviour {
 
     public void ResetLevel()
     {
-        StartCoroutine(Reset());
+        string levelName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(levelName);
     }
 
     public string GetLevelName()
@@ -57,10 +58,4 @@ public class LevelManager : MonoBehaviour {
         SceneManager.LoadScene(levelName);
     }
 
-    IEnumerator Reset()
-    {
-        yield return new WaitForSeconds(2.0f);
-        string levelName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadSceneAsync(levelName);
-    }
 }
